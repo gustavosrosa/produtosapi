@@ -3,6 +3,7 @@ package br.com.gustavorosa.produtosapi.controller;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,8 +37,12 @@ public class ProdutoController {
 	@GetMapping("{id}")
 	public Produto obterPorId(@PathVariable String id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
-		return produto.orElse(null);
-		
+		return produto.orElse(null);	
+	}
+	
+	@DeleteMapping("{id}")
+	public void deletar(@PathVariable String id) {
+		produtoRepository.deleteById(id);
 	}
 
 }
