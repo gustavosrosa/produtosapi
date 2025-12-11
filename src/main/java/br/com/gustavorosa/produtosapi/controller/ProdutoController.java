@@ -1,5 +1,6 @@
 package br.com.gustavorosa.produtosapi.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.gustavorosa.produtosapi.model.Produto;
@@ -50,6 +52,11 @@ public class ProdutoController {
 	public void atualizar(@PathVariable String id, @RequestBody Produto produto) {
 		produto.setId(id);
 		produtoRepository.save(produto);
+	}
+	
+	@GetMapping
+	public List<Produto> obterProdutosPorNome(@RequestParam("nome") String nome) {
+		return produtoRepository.findByNome(nome);
 	}
 
 }
